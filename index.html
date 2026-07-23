@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA: Educación en la Era Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .escudo-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.3);
+        }
+
+        .escudo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .nav-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .content-section {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .subsection-title {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .content-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .content-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .content-box p {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .interactive-content {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #f5576c;
+        }
+
+        .interactive-content h3 {
+            color: #f5576c;
+            margin-bottom: 15px;
+        }
+
+        .interactive-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .interactive-content li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(245, 87, 108, 0.2);
+            line-height: 1.6;
+        }
+
+        .interactive-content li:last-child {
+            border-bottom: none;
+        }
+
+        .interactive-content strong {
+            color: #f5576c;
+        }
+
+        .references {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .references p {
+            line-height: 1.8;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .credits {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .credits p {
+            margin: 5px 0;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .image-container-wrapper {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .zoom-icon {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .zoom-icon:hover {
+            background: rgba(118, 75, 162, 0.9);
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #f5576c;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 25px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .subsection-title {
+                font-size: 1.2em;
+            }
+
+            .content-box, .interactive-content, .references {
+                padding: 20px;
+                margin: 15px 0;
+            }
+
+            .content-box h3, .interactive-content h3 {
+                font-size: 1.1em;
+            }
+
+            .content-box p, .interactive-content li, .references p {
+                font-size: 0.9em;
+            }
+
+            .zoom-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .credits {
+                padding: 20px;
+            }
+
+            .credits p {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="escudo-container">
+                <img src="Img/Escudo_Unicartagena.png" alt="Escudo Universidad" onerror="this.style.display='none'">
+            </div>
+            <h1>🎓 Educación en la Era Digital</h1>
+            <p>Un Nuevo Paradigma Educativo para el Siglo XXI</p>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showSection('eje1')">Eje 1: Equidad Social</button>
+            <button class="nav-btn" onclick="showSection('eje2')">Eje 2: Desafíos ASE</button>
+            <button class="nav-btn" onclick="showSection('eje3')">Eje 3: Tendencias Tecnológicas</button>
+            <button class="nav-btn" onclick="showSection('eje4')">Eje 4: Identidades de Aprendizaje</button>
+            <button class="nav-btn" onclick="showSection('conclusion')">Conclusión</button>
+            <button class="nav-btn" onclick="showSection('referencias')">Referencias</button>
+        </div>
+
+        <div id="eje1" class="content-section active">
+            <h2 class="section-title">Eje 1: Equidad Social y Bien Común en la Propuesta Curricular</h2>
+            
+            <div class="content-box">
+                <h3>🌍 El Currículo como Motor de Equidad y Bienestar Colectivo</h3>
+                <p>Una propuesta curricular de calidad es fundamental para construir una sociedad más justa. Actúa como un catalizador para la transformación social, garantizando la inclusión y la pertinencia cultural, y alineándose con los objetivos de desarrollo sostenible de la UNESCO.</p>
+            </div>
+
+            <div class="image-container-wrapper">
+                <div class="image-container">
+                    <img src="Img/grupo-multirracial-jovenes-estudiantes-alegres-que-unen-manos-circulo-sentados-hierba-fuera-campus_325573-3134.avif" alt="Equidad Social y Bien Común" onclick="openModal(this.src)">
+                    <div class="zoom-icon" onclick="openModal(this.previousElementSibling.src)">🔍</div>
+                </div>
+            </div>
+
+            <div class="interactive-content">
+                <h3>📚 Detalles sobre Equidad y Bien Común</h3>
+                <ul>
+                    <li><strong>Inclusión Radical:</strong> Un currículo equitativo elimina barreras de acceso y ofrece oportunidades de aprendizaje permanente para todos, sin importar su origen cultural o socioeconómico. Esto es crucial para el desarrollo de una sociedad cohesionada y justa [1].</li>
+                    <li><strong>Pertinencia Cultural:</strong> La educación debe enraizarse en las fuerzas culturales locales y los conocimientos ancestrales, al mismo tiempo que se abre al saber universal. Esto permite que los estudiantes se auto-realicen y se auto-gobiernen como ciudadanos universales digitales [2].</li>
+                    <li><strong>Justicia Social:</strong> El currículo es una herramienta poderosa para la cohesión, la paz y la estabilidad comunitaria. Al integrar valores y normas culturales, fomenta el respeto y la comprensión mutua, contribuyendo directamente al bien común [1].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="eje2" class="content-section">
+            <h2 class="section-title">Eje 2: Desafíos en la Implementación de ASE y Pedagogías Digitales</h2>
+            
+            <div class="content-box">
+                <h3>⚡ Superando Obstáculos: ASE y Tecnología en la Educación</h3>
+                <p>La integración del Aprendizaje Social y Emocional (ASE) y las pedagogías digitales presenta desafíos significativos. Es vital asegurar que la tecnología potencie la empatía y la colaboración, en lugar de deshumanizar el proceso educativo. La formación docente y la superación de la brecha digital son claves.</p>
+            </div>
+
+            <div class="image-container-wrapper">
+                <div class="image-container">
+                    <img src="img/chica-smartphone-aprendiendo-geografia-casa_380164-248824.avif" alt="Desafíos en la Implementación de ASE" onclick="openModal(this.src)">
+                    <div class="zoom-icon" onclick="openModal(this.previousElementSibling.src)">🔍</div>
+                </div>
+            </div>
+
+            <div class="interactive-content">
+                <h3>🔍 Análisis de Desafíos</h3>
+                <ul>
+                    <li><strong>Brecha Digital:</strong> No se trata solo del acceso a dispositivos, sino de desarrollar competencias para un uso crítico y ético de las tecnologías. Muchos estudiantes carecen de las habilidades necesarias para aprovechar plenamente las herramientas digitales [3].</li>
+                    <li><strong>Resistencia al Cambio:</strong> La transición de un modelo educativo tradicional, centrado en la transmisión de conocimientos, a uno innovador, enfocado en la creatividad y la participación activa, requiere una reconfiguración profunda del rol del docente y de las estructuras institucionales [4].</li>
+                    <li><strong>Integración del ASE:</strong> El Aprendizaje Social y Emocional debe ser un componente central, no un añadido. Su objetivo es humanizar la tecnología, promoviendo habilidades como la empatía, la autoconciencia y la gestión de emociones, fundamentales para evitar la despersonalización en un entorno digital [5].</li>
+                    <li><strong>Formación Docente:</strong> Los educadores necesitan ser líderes de transformación, capaces de manejar pedagogías disruptivas como el aula invertida y de guiar a los estudiantes en la complejidad de la sociedad del conocimiento [4].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="eje3" class="content-section">
+            <h2 class="section-title">Eje 3: Repensando la Educación ante las Tendencias Tecnológicas</h2>
+            
+            <div class="content-box">
+                <h3>🌟 La Educación en la Era Digital: Un Nuevo Paradigma</h3>
+                <p>Las nuevas tendencias tecnológicas están redefiniendo el aula, transformándola en un laboratorio conectado al ciberespacio. Este paradigma impulsa metodologías disruptivas como el b-learning y el aula invertida, fomentando la autonomía y el aprendizaje holístico, donde la Inteligencia Artificial actúa como un apoyo ético.</p>
+            </div>
+
+            <div class="image-container-wrapper">
+                <div class="image-container">
+                    <img src="Img/chat-web-aprendizaje-electronico-estudiantes-educacion-distancia_1235831-60888.avif" alt="Tendencias Tecnológicas en Educación" onclick="openModal(this.src)">
+                    <div class="zoom-icon" onclick="openModal(this.previousElementSibling.src)">🔍</div>
+                </div>
+            </div>
+
+            <div class="interactive-content">
+                <h3>📚 Tendencias y Redefinición Educativa</h3>
+                <ul>
+                    <li><strong>Pedagogías Disruptivas:</strong> El b-learning (aprendizaje semipresencial) y el aula invertida son ejemplos de cómo se potencia la autonomía del estudiante, permitiéndole gestionar su propio ritmo y estilo de aprendizaje [6].</li>
+                    <li><strong>Ciberespacio del Aprendizaje:</strong> El aula física se expande a un entorno virtual, integrándose con redes globales de investigación y herramientas de Inteligencia Artificial. Esto facilita el acceso a información y la colaboración en proyectos complejos [2].</li>
+                    <li><strong>Aprendizaje Holístico:</strong> La educación en la sociedad del conocimiento integra la inteligencia (cerebro), la acción (manos) y la pasión (corazón). La IA se utiliza como una herramienta ética para apoyar la redacción, la búsqueda de información y el análisis de datos, liberando al estudiante para el pensamiento crítico y creativo [2].</li>
+                    <li><strong>Descentralización del Conocimiento:</strong> El saber ya no reside exclusivamente en el docente o en los libros, sino que se distribuye en repositorios digitales, bibliotecas virtuales y entornos personales de aprendizaje (PLE), promoviendo una construcción colectiva del conocimiento [2].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="eje4" class="content-section">
+            <h2 class="section-title">Eje 4: Identidades de Aprendizaje en Modelos Emergentes</h2>
+            
+            <div class="content-box">
+                <h3>🌍 Formando al Ciudadano Universal Digital del Siglo XXI</h3>
+                <p>Los modelos educativos emergentes buscan formar un "Ciudadano Universal Digital" proactivo y ético. Se promueve la autonomía, la colaboración y el pensamiento crítico, organizando el aprendizaje en rutas flexibles que conectan los intereses personales, institucionales y profesionales. El estudiante se convierte en un creador de conocimiento y un agente de cambio social.</p>
+            </div>
+
+            <div class="image-container-wrapper">
+                <div class="image-container">
+                    <img src="img/ciencia-adn-investigacion-desarrollo-humano_53876-121145.avif" alt="Identidades de Aprendizaje en Modelos Emergentes" onclick="openModal(this.src)">
+                    <div class="zoom-icon" onclick="openModal(this.previousElementSibling.src)">🔍</div>
+                </div>
+            </div>
+
+            <div class="interactive-content">
+                <h3>🎯 Características del Ciudadano Universal Digital</h3>
+                <ul>
+                    <li><strong>Autonomía y Autorregulación:</strong> Los estudiantes desarrollan la capacidad de auto-educarse y auto-gobernarse en entornos virtuales, tomando las riendas de su propio proceso de aprendizaje [2].</li>
+                    <li><strong>Identidades Colaborativas:</strong> El aprendizaje se concibe como un proceso en red, donde los individuos articulan el contexto local con el planetario, colaborando en proyectos y compartiendo conocimientos [2].</li>
+                    <li><strong>Pensamiento Crítico y Ético:</strong> Se forman individuos que no solo consumen información, sino que la cuestionan, la analizan y la utilizan para proponer soluciones innovadoras a problemas sociales, siempre bajo un marco ético riguroso [5].</li>
+                    <li><strong>Organización Modular del Aprendizaje:</strong> Los modelos emergentes estructuran el aprendizaje en rutas flexibles que conectan los Entornos Personales de Aprendizaje (PLE), los Sistemas de Gestión del Aprendizaje (LMS) y las necesidades del desarrollo profesional, permitiendo una formación personalizada y adaptativa [2].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="conclusion" class="content-section">
+            <h2 class="section-title">Conclusión</h2>
+            
+            <div class="content-box">
+                <h3>💡 La Transformación Educativa</h3>
+                <p>La transformación educativa es un imperativo en la sociedad del conocimiento. Al adoptar currículos flexibles, pedagogías innovadoras y herramientas digitales, podemos formar individuos críticos, creativos y socialmente responsables, capaces de construir un futuro más equitativo y sostenible. La infografía interactiva es una herramienta poderosa para visualizar y comprender esta compleja pero necesaria evolución.</p>
+            </div>
+        </div>
+
+        <div id="referencias" class="content-section">
+            <h2 class="section-title">Referencias Bibliográficas</h2>
+            
+            <div class="image-container-wrapper">
+                <div class="image-container">
+                    <img src="Img/gente-negocios-esta-haciendo-lluvia-ideas_53876-137640.avif" alt="Colaboración e Innovación" onclick="openModal(this.src)">
+                    <div class="zoom-icon" onclick="openModal(this.previousElementSibling.src)">🔍</div>
+                </div>
+            </div>
+            
+            <div class="references">
+                <p>[1] Marope, M. (2017). El currículo en el siglo XXI: Desafíos y oportunidades. UNESCO.</p>
+                <p>[2] Universidad de Cartagena. (2026). Unidad 3: Hacia la construcción de un currículo y una práctica pedagógica en la sociedad del conocimiento. Centro de Postgrados.</p>
+                <p>[3] Bartolomé, A. (2004). Blended Learning. Conceptos básicos. Pixel-Bit. Revista de Medios y Educación, (23), 7-20.</p>
+                <p>[4] Pérez, Á. (2012). La cultura escolar en la sociedad digital. Ediciones Morata.</p>
+                <p>[5] UNESCO. (2025). Pedagogía Digital y Aprendizaje Social y Emocional: Marco de Referencia Global. UNESCO Publishing.</p>
+                <p>[6] Castells, M. (1999). La era de la información: economía, sociedad y cultura. Siglo XXI Editores.</p>
+            </div>
+        </div>
+
+        <div class="credits">
+            <p><strong>Autor:</strong> LUIS FERLEY BADER ARCIA Y HENRY DE JESUS TORRES OVIEDO</p>
+            <p><strong>Institución:</strong> Universidad de Cartagena</p>
+            <p><strong>Curso:</strong> Currículo - Grupo 172</p>
+            <p><strong>Fecha:</strong> 23 de julio de 2026</p>
+        </div>
+    </div>
+
+    <!-- Modal para ampliar imagen -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Desactivar todos los botones
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Activar el botón correspondiente
+            event.target.classList.add('active');
+        }
+
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
